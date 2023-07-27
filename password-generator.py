@@ -1,5 +1,4 @@
 import string
-from random import *
 
 letters=string.ascii_letters
 digits=string.digits
