@@ -1,50 +1,51 @@
-import tkinter as tk
+# To-Do List Application
 
-def on_click(event):
-    current_text = entry.get()
-    button_text = event.widget.cget("text")
+# Initialize an empty list to store tasks
+tasks = []
 
-    if button_text == "=":
-        try:
-            result = eval(current_text)
-            entry.delete(0, tk.END)
-            entry.insert(tk.END, str(result))
-        except Exception as e:
-            entry.delete(0, tk.END)
-            entry.insert(tk.END, "Error")
-    elif button_text == "C":
-        entry.delete(0, tk.END)
+def add_task(task):
+    tasks.append(task)
+    print(f"Task '{task}' has been added to the To-Do list.")
+
+def view_tasks():
+    if not tasks:
+        print("The To-Do list is empty.")
     else:
-        entry.insert(tk.END, button_text)
+        print("To-Do List:")
+        for idx, task in enumerate(tasks, 1):
+            print(f"{idx}. {task}")
 
-# Create the main window
-root = tk.Tk()
-root.title("Calculator")
+def remove_task(task_index):
+    if 1 <= task_index <= len(tasks):
+        removed_task = tasks.pop(task_index - 1)
+        print(f"Task '{removed_task}' has been removed from the To-Do list.")
+    else:
+        print("Invalid task index.")
 
-# Create the entry widget to display the result and take input
-entry = tk.Entry(root, font=("Arial", 20))
-entry.grid(row=0, column=0, columnspan=4)
+def main():
+    while True:
+        print("\nOptions:")
+        print("1. Add Task")
+        print("2. View Tasks")
+        print("3. Remove Task")
+        print("4. Exit")
 
-# Buttons for numbers and operators
-buttons = [
-    "7", "8", "9", "/",
-    "4", "5", "6", "*",
-    "1", "2", "3", "-",
-    "0", ".", "=", "+",
-    "C"
-]
+        choice = input("Enter your choice (1/2/3/4): ")
 
-# Create and place buttons in a grid
-row, col = 1, 0
-for button_text in buttons:
-    button = tk.Button(root, text=button_text, font=("Arial", 20), padx=20, pady=10)
-    button.grid(row=row, column=col)
-    col += 1
-    if col > 3:
-        col = 0
-        row += 1
+        if choice == "1":
+            task = input("Enter the task to add: ")
+            add_task(task)
+        elif choice == "2":
+            view_tasks()
+        elif choice == "3":
+            view_tasks()
+            task_index = int(input("Enter the task number to remove: "))
+            remove_task(task_index)
+        elif choice == "4":
+            print("Exiting the To-Do list application.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
-    button.bind("<Button-1>", on_click)
-
-# Run the main event loop
-root.mainloop()
+if __name__ == "__main__":
+    main()
