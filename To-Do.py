@@ -3,19 +3,19 @@
 # Initialize an empty list to store tasks
 tasks = []
 
-def add_task(task):
+def add(task):
     tasks.append(task)
-    print(f"Task '{task}' has been added to the To-Do list.")
+    print(f"Task '{task}' has been added to your To-Do list.")
 
-def view_tasks():
+def view():
     if not tasks:
-        print("The To-Do list is empty.")
+        print("\nThe To-Do list is empty.")
     else:
-        print("To-Do List:")
-        for idx, task in enumerate(tasks, 1):
-            print(f"{idx}. {task}")
+        print("\nTo-Do List:")
+        for num, task in enumerate(tasks, 1):
+            print(f"{num}. {task}")
 
-def remove_task(task_index):
+def remove(task_index):
     if 1 <= task_index <= len(tasks):
         removed_task = tasks.pop(task_index - 1)
         print(f"Task '{removed_task}' has been removed from the To-Do list.")
@@ -33,19 +33,19 @@ def main():
         choice = input("Enter your choice (1/2/3/4): ")
 
         if choice == "1":
-            task = input("Enter the task to add: ")
-            add_task(task)
+            task = input("Enter the task you want to add: ")
+            add(task)
         elif choice == "2":
-            view_tasks()
+            view()
         elif choice == "3":
-            view_tasks()
-            task_index = int(input("Enter the task number to remove: "))
-            remove_task(task_index)
+            view()
+            task_index = int(input("Enter the numered task you want to remove: "))
+            remove(task_index)
         elif choice == "4":
             print("Exiting the To-Do list application.")
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("Invalid choice. Please enter a valid value.")
 
 if __name__ == "__main__":
     main()
